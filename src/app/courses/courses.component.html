@@ -1,0 +1,35 @@
+<p [class.courses-component-bold]="hasClass">{{ title | uppercase}}</p>
+<label>Filter By : </label><input [(ngModel)]="filterBy">
+<ul>
+    <li [style.background-color]="o?'yellow':'orange'" *ngFor="let course of filteredCourses;odd as o;first as f;last as l">
+    <a [routerLink]="['/course/course-desc',course.Id]">{{course.Name}}</a>
+    <button [routerLink]="['/course/courseForm',course.Id]" >Edit</button>
+    </li>
+</ul>
+<img [src]="imgUrl">
+
+<div *ngIf="!showDiv">Showed Div</div>
+<h4 [style.color]=" 1 ? 'Red' : 'Blue' ">h4</h4>
+
+<input type="text" #myInput>
+<button id="btn" (click)="clicked(myInput)">Click Me</button>
+<span>{{inputPassed}}</span><br>
+
+<input type="text" [(ngModel)]="bananaInBox">
+<div>{{ bananaInBox }}</div>
+
+<ng-content select="h2"></ng-content>
+
+<div [ngStyle]="{ 'color' : 1 ? 'green' : 'red' }" >green</div>
+
+<ng-content select="h3"></ng-content>
+
+<ng-content select=".helloWorld"></ng-content>
+
+<h5 *ngIf="myInput">My Input {{ 5  | currency : 'USD' }} </h5>
+
+<h4>Message From Parent :{{MessageFromParent}}</h4>
+
+<h2>{{ title | converttospaces : 'I' }}</h2>
+
+<button class="btn btn-primary" (click)="callGreetOfParent()">Greet</button>

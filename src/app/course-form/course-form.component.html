@@ -1,0 +1,73 @@
+<h1>{{title}}</h1>
+
+<form [formGroup] = "courseForm" (ngSubmit)="saveCourse()">
+
+    <table>
+        <tr>
+            <td><label>Name :</label></td>
+            <td><input formControlName = "Name"></td>
+        </tr>
+        <tr>
+            <td><label>DisabledField :</label></td>
+            <td><input formControlName = "DisabledFielddd"></td>
+        </tr>
+        <tr>
+            <td><label>Cost :</label></td>
+            <td><input formControlName = "Cost">
+                <br><span *ngIf = "courseForm.get('Cost').errors?.range" style="color: red;" >Invalid Cost</span>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Description :</label></td>
+            <td><textarea formControlName = "Desc"></textarea>
+                <br><span *ngIf = "!courseForm.get('Desc').valid" style="color: red;" >Description is required</span>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Contact by :</label></td>
+            <td><input type="radio" formControlName = "TypeOfContact" value = "Send Mail" (click)="contactBy('email')"><label>Send Mail</label>
+                <input type="radio" formControlName = "TypeOfContact" value = "Send SMS" (click)="contactBy('phone')"><label>Send SMS</label>
+            </td>
+        </tr>
+        <tr *ngIf = "courseForm.get('TypeOfContact').value == 'Send SMS' ">
+            <td><label>Phone Number :</label></td>
+            <td><input formControlName = "PhoneNumber"></td>
+        </tr>
+        <tr *ngIf = "courseForm.get('TypeOfContact').value == 'Send Mail' ">
+            <td><label>Email :</label></td>
+            <td><input formControlName = "Email"></td>
+        </tr>
+        <tr formGroupName = "CourseCodePart">
+            <td><label>Course Code :</label></td>
+            <td><input formControlName = "CourseCode"><br>
+                <span *ngIf = "courseForm.get('CourseCodePart').errors?.equal" style="color: red;">{{typeOfContactMessage}}</span>
+            </td>
+            <td><label>Confirm Course Code :</label></td>
+            <td><input formControlName = "ConfirmCourseCode"></td>
+        </tr>
+        <tr formArrayName="CourseSessions" *ngFor = "let session of courseForm.get('CourseSessions').controls; let i = index">
+            <td [formGroupName]="i">
+                <label>Day :</label>
+                <input formControlName="Day">
+                <br>
+                <label>At :</label>
+                <input formControlName="At">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="addCourseSession()" >Add Course Session</button>
+            </td>
+            <td>
+                <button (click)="removeCourseSession()" >Remove Course Session</button>
+            </td>
+        </tr>
+        <tr>
+            <td><button (click)="suggestCourse()">Suggest Course</button></td>
+            <td><button type="submit" [disabled]="!courseForm.valid">Save</button>
+                <br><span></span>
+            </td>
+        </tr>
+    </table>
+</form>
+

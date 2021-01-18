@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <app-courses [myInputAlias]="childrenInput" [MessageFromParent]="MessageToChild" (greetEventEmitter)="GreetFromChild($event)">
+  <h2>using courses component : 1</h2>
+  <h3>using courses component : 1</h3>
+  <ng-container class="helloWorld">hhhh</ng-container>
+</app-courses> -->
+<span *ngIf="isLoading" class="fa fa-spinner spinner"></span>
+
+<ul class="nav navbar-nav">
+  <li *ngIf="logedIn"><button (click)="log('logout')">Logout</button><label>Welcome {{name}}</label></li>
+  <li *ngIf="!logedIn"><button (click)="log('login')">Login</button><label>Welcome {{name}}</label></li>
+  <li><a routerLink='/welcome' routerLinkActive="active-link-class">Welcome</a></li>
+  <li><a [routerLink]="['/about']" routerLinkActive="active-link-class">About</a></li>
+  <li><a [routerLink]="['/course/courses']" routerLinkActive="active-link-class" [routerLinkActiveOptions]="{ exact : true }">Courses</a></li>
+  <li><a [routerLink]="['/course/courseForm', '0']" routerLinkActive="active-link-class">Add Course</a></li>
+  <li><a routerLink='/comp-one' routerLinkActive="active-link-class">Component One</a></li>
+  <li><a [routerLink]="['/comp-two']" routerLinkActive="active-link-class">Component Two</a></li> 
+</ul>
+
+<router-outlet></router-outlet>

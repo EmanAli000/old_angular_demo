@@ -1,0 +1,13 @@
+<h1>Hello from Feature module component-two</h1>
+<button queryParamsHandling="preserve" [routerLink]="['/comp-one']">Back</button>
+<br><br>
+<!-- relative path not absolute as this is a child so don't use / before the segment -->
+<button [routerLink]="['child1']" routerLinkActive="active-link-class"> ChildOneByHTML </button>
+<button (click)="loadChild2()" routerLinkActive="active-link-class"> ChildTwoByCode</button>
+
+<router-outlet></router-outlet>
+
+<button [routerLink]="[{ outlets: { secondaryOutlet : ['secondaryOutletCompOne'] } }]" routerLinkActive="active-link-class"> SecondaryOutletCompOneByHtml </button>
+<button (click)="navigateToSecondaryOutletCompTwo()" routerLinkActive="active-link-class"> SecondaryOutletCompTwoByCode </button>
+
+<router-outlet name="secondaryOutlet"></router-outlet>
